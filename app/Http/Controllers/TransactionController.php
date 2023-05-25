@@ -29,9 +29,9 @@ class TransactionController extends Controller
 
 
 
-
+        $orderId = 'T-' . time();
         $transaction_details = array(
-            'order_id'    => time(),
+            'order_id'    => $orderId,
             'gross_amount'  => $request->amount
         );; // Simpan perubahan
 
@@ -73,9 +73,10 @@ class TransactionController extends Controller
 
 
         $paymentUrl = \Midtrans\Snap::createTransaction($transaction);
+        dd($paymentUrl);
         $payment = Payment::create([
             'service_name' => 'Snap Midtrans',
-            'payment_code' =>  $paymentUrl->token,
+            'payment_code' =>  $orderId,
             'payment_url' =>   $paymentUrl->redirect_url,
             'service_id' => 'midtrans',
 
