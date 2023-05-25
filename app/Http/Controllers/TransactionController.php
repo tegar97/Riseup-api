@@ -218,7 +218,7 @@ class TransactionController extends Controller
 
         $auth = auth()->user();
 
-        $transaction = transaction::where('user_id', $auth->id)->with('payments')->get();
+        $transaction = transaction::with('payments')->where('user_id', $auth->id)->get();
 
         return response()->json([
             'message' => 'Success',
