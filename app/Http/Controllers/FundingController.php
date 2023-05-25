@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helper\ImageResizer;
-use App\Models\funding;
+use App\Models\Funding;
 use App\Models\Ukm;
 use Illuminate\Http\Request;
 
