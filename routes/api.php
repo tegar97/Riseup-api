@@ -33,7 +33,7 @@ Route::group(
         Route::get('/funding/{id}', [FundingController::class, 'apiIndexDetail']);
 
         Route::post('/transaction', [TransactionController::class, 'Fund']);
-        Route::post('/webhook', [TransactionController::class, 'webhook']);
+        Route::post('/webhook', [TransactionController::class, 'webHookHandler']);
         Route::group([
             'prefix' => 'auth'
         ], function () {
