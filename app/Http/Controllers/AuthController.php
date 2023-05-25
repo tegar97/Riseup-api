@@ -68,7 +68,7 @@ class AuthController extends Controller
             if (!$jwt_token = JWTAuth::attempt($credentials)) {
                 return response()->json([
                     'success' => false,
-                    'message' =>  [
+                    'errors' =>  [
                         'email' => ['Email atau password salah']
 
                     ],
