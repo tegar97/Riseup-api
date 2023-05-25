@@ -131,7 +131,7 @@ class TransactionController extends Controller
 
         $transaction = transaction::where('payment_id', $payment->id)->first();
 
-        if($payment) {
+        if(!$payment) {
 
             return  response()->json([
                 'message' => 'Payment not found',
