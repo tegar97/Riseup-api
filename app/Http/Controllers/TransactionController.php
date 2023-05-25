@@ -72,11 +72,10 @@ class TransactionController extends Controller
         );
 
 
-
         $paymentUrl = \Midtrans\Snap::createTransaction($transaction);
         $payment = Payment::create([
             'service_name' => 'Snap Midtrans',
-            'payment_code' =>  $items[0]['id'],
+            'payment_code' =>  $paymentUrl->token,
             'payment_url' =>   $paymentUrl->redirect_url,
             'service_id' => 'midtrans',
 
@@ -114,8 +113,8 @@ class TransactionController extends Controller
         $statusCode = $data['status_code'];
         $grossAmount = $data['gross_amount'];
         $serverKey = env('MIDTRANS_SERVER_KEY');
+        dd($orderId);
         $mySignatureKey = hash('sha512', $orderId . $statusCode . $grossAmount . $serverKey);
-
         $transactioStatus = $data['transaction_status'];
         $type = $data['payment_type'];
         $fraudStatus = $data['fraud_status'];
@@ -128,6 +127,7 @@ class TransactionController extends Controller
         };
 
         $payment = Payment::where('payment_code', $orderId)->first();
+        dd($payment);
         $transaction = transaction::where('payment_id', $payment->id)->first();
 
         if($payment) {
