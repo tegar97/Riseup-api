@@ -19,6 +19,10 @@ class Payment extends Model
 
     ];
 
+    public function transaction() {
+        return $this->belongsTo(Transaction::class);
+    }
+
 
 
 }
