@@ -113,7 +113,7 @@ class TransactionController extends Controller
         $statusCode = $data['status_code'];
         $grossAmount = $data['gross_amount'];
         $serverKey = env('MIDTRANS_SERVER_KEY');
-        dd($orderId);
+
         $mySignatureKey = hash('sha512', $orderId . $statusCode . $grossAmount . $serverKey);
         $transactioStatus = $data['transaction_status'];
         $type = $data['payment_type'];
@@ -127,7 +127,7 @@ class TransactionController extends Controller
         };
 
         $payment = Payment::where('payment_code', $orderId)->first();
-        dd($payment);
+
         $transaction = transaction::where('payment_id', $payment->id)->first();
 
         if($payment) {
