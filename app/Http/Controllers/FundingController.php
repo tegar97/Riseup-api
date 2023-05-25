@@ -110,11 +110,12 @@ class FundingController extends Controller
         ]);
 
         $image = $request->file('image');
-        $getImageName = ImageResizer::ResizeImage($image, 'images', 'images', 300, 300);
-
+        $getImageName = ImageResizer::ResizeImage($image, 'images', 'images',  300, 300 , 'webp');
+        $bigImage = ImageResizer::ResizeImage($image, 'images', 'images',  1500, 1500 , 'webp',100);
         $funding = new Funding();
         $funding->title = $request->title;
         $funding->image = $getImageName;
+        $funding->big_image = $bigImage;
         $funding->fund_raise_use = $request->fund_raise_use;
         $funding->ukm_id = $request->ukm_id;
         $funding->target_amount = $request->target_amount;
