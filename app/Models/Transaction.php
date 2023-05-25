@@ -17,4 +17,8 @@ class transaction extends Model
         'status'
 
     ];
+
+    public function payments() {
+        return $this->belongsTo(Payment::class);
+    }
 }
