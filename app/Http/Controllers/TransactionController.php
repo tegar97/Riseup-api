@@ -73,7 +73,7 @@ class TransactionController extends Controller
 
 
         $paymentUrl = \Midtrans\Snap::createTransaction($transaction);
-        dd($paymentUrl);
+
         $payment = Payment::create([
             'service_name' => 'Snap Midtrans',
             'payment_code' =>  $orderId,
