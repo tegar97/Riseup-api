@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FundingController;
-use App\Http\Controllers\ukmController;
+use App\Http\Controllers\UkmController;
 use Illuminate\Support\Facades\Route;
 
 /*

@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\Ukm;
 use Illuminate\Http\Request;
 
-class ukmController extends Controller
+class UkmController extends Controller
 {
     /**
      * Display a listing of the resource.
