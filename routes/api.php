@@ -34,7 +34,7 @@ Route::group(
 
         Route::post('/transaction', [TransactionController::class, 'Fund']);
         Route::post('/webhook', [TransactionController::class, 'webHookHandler']);
-        Route::get('/transaction', [TransactionController::class, 'index']);
+        Route::get('/transaction', [TransactionController::class, 'getMyTransaction']);
         Route::group([
             'prefix' => 'auth'
         ], function () {
