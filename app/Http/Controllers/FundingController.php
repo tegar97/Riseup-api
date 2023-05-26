@@ -59,7 +59,7 @@ class FundingController extends Controller
 
     public function apiIndexDetail($id) {
 
-        $fundings = Funding::with('ukm')->where('id', $id)->first();
+        $fundings = Funding::with('ukm', 'payments')->where('id', $id)->first();
 
         return response()->json([
             'success' => true,

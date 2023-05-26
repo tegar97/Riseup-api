@@ -15,4 +15,14 @@ class Funding extends Model
     {
         return $this->belongsTo(Ukm::class);
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }
