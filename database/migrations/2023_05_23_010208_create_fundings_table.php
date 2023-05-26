@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('target_amount');
             $table->string('current_amount');
             $table->boolean('status')->default(0);
-
-
             $table->timestamps();
         });
     }

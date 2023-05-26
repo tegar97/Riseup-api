@@ -79,6 +79,10 @@ class TransactionController extends Controller
             'payment_code' =>  $orderId,
             'payment_url' =>   $paymentUrl->redirect_url,
             'service_id' => 'midtrans',
+            'user_id' => $auth->id,
+            'funding_id' => $funding->id,
+            'amount' => $request->amount,
+            'status' => false,
 
 
         ]);
@@ -175,6 +179,18 @@ class TransactionController extends Controller
 
             $funding->save();
 
+            // find payments
+
+            $payment = Payment::find($transaction->payment_id);
+
+            // update payment
+
+            $payment->status = 1;
+
+            // save
+
+            $payment->save();
+
 
 
 
@@ -218,7 +234,9 @@ class TransactionController extends Controller
 
         $auth = auth()->user();
 
-        $transaction = transaction::with('payments')->where('user_id', $auth->id)->get();
+
+
+        $transaction = payment::with('funding')->where('user_id', $auth->id)->get();
 
         return response()->json([
             'message' => 'Success',

@@ -14,13 +14,24 @@ class Payment extends Model
         'payment_code',
         'amount',
         'payment_url',
-        'service_id'
+        'service_id',
+        'status',
+        'user_id',
+        'funding_id',
 
 
     ];
 
     public function transaction() {
         return $this->belongsTo(Transaction::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function funding() {
+        return $this->belongsTo(Funding::class);
     }
 
 

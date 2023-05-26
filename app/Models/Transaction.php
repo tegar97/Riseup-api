@@ -18,7 +18,20 @@ class transaction extends Model
 
     ];
 
-    public function payments() {
-        return $this->hasMany(Payment::class);
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
+
+    public function funding()
+    {
+        return $this->belongsTo(Funding::class);
+    }
+
+    public function payments()
+    {
+        return $this->belongsTo(Payment::class);
+    }
+
+
 }
