@@ -245,4 +245,21 @@ class TransactionController extends Controller
     }
 
 
+    // get transaction on funding
+
+    public function getTransactionOnFunding(Request $request) {
+
+
+
+        $funding = Funding::where('id', $request->id)->get();
+
+        $transaction = transaction::with('payment','users')->where('funding_id', $funding->id)->get();
+
+        return response()->json([
+            'message' => 'Success',
+            'data' => $transaction
+        ], 200);
+    }
+
+
 }
