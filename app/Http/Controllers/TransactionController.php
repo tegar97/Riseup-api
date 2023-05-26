@@ -247,11 +247,11 @@ class TransactionController extends Controller
 
     // get transaction on funding
 
-    public function getTransactionOnFunding(Request $request) {
+    public function getTransactionOnFunding($id) {
 
 
 
-        $funding = Funding::where('id', $request->id)->get();
+        $funding = Funding::where('id', $id)->get();
 
         $transaction = transaction::with('payment','users')->where('funding_id', $funding->id)->get();
 
@@ -260,6 +260,66 @@ class TransactionController extends Controller
             'data' => $transaction
         ], 200);
     }
+
+
+    // get web static
+
+    public function getStatic(){
+
+        // get total funding
+
+        $totalFunding = Funding::count();
+
+        // get total user
+
+        $totalUser = User::count();
+
+        // get total transaction amount
+
+        $totalTransaction = transaction::sum('amount');
+
+        // convert Rp.1.000.000 to 1M   , 1B , 1T
+
+        $totalTransaction = $this->convertToMoney($totalTransaction);
+
+
+
+        return response()->json([
+            'message' => 'Success',
+            'data' => [
+                'totalFunding' => $totalFunding,
+                'totalUser' => $totalUser,
+                'totalTransaction' => $totalTransaction
+            ]
+        ], 200);
+
+
+
+
+
+
+    }
+
+    // convert to money
+
+    public function convertToMoney( $amount) {
+
+        $amount = $amount;
+
+        if ($amount >= 1000000000000) {
+            return round(($amount / 1000000000000), 1) . 'T';
+        } else if ($amount >= 1000000000) {
+            return round(($amount / 1000000000), 1) . 'B';
+        } else if ($amount >= 1000000) {
+            return round(($amount / 1000000), 1) . 'M';
+        } else if ($amount >= 1000) {
+            return round(($amount / 1000), 1) . 'K';
+        }
+
+        return $amount;
+
+    }
+
 
 
 }
