@@ -172,8 +172,10 @@ class TransactionController extends Controller
 
             $funding->current_amount = $funding->current_amount + $transaction->amount;
 
-            // f
-            $funding->status = 1;
+            if($funding->current_amount >= $funding->amount) {
+                $funding->status = 1;
+
+            }
 
             //save
 
