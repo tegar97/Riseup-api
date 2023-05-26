@@ -43,13 +43,7 @@
 
 
 
-                <div class="form-group mb-5">
-                    <label for="status" class="mb-2">Status</label>
-                    <select class="form-control" name="status" id="status">
-                        <option value="1">Diterima</option>
-                        <option value="0">Ditolak</option>
-                    </select>
-                </div>
+                
 
                 <button type="submit" class="btn btn-primary-green">Submit</button>
             </form>

@@ -48,7 +48,7 @@ class FundingController extends Controller
             }
         }
 
-        $fundings = $query->with('ukm')->get();
+        $fundings = $query->with('ukm')->where('status',0)->get();
 
         return response()->json([
             'success' => true,
@@ -106,7 +106,6 @@ class FundingController extends Controller
             'fund_raise_use' => 'required',
             'ukm_id' => 'required',
             'target_amount' => 'required',
-            'status' => 'required',
         ]);
 
         $image = $request->file('image');
@@ -120,7 +119,7 @@ class FundingController extends Controller
         $funding->ukm_id = $request->ukm_id;
         $funding->target_amount = $request->target_amount;
         $funding->current_amount = 0;
-        $funding->status = $request->status;
+        $funding->status = 0;
         $funding->save();
 
         return redirect()->route('funding.index')
